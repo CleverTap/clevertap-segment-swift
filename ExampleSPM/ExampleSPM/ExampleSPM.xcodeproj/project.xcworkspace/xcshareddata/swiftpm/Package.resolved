@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "analytics-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/analytics-swift.git",
+      "state" : {
+        "revision" : "f6f3a7fafcace7bcdbda329f9b309f31bf9a42a1",
+        "version" : "1.5.11"
+      }
+    },
+    {
+      "identity" : "clevertap-segment-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CleverTap/clevertap-segment-swift.git",
+      "state" : {
+        "branch" : "SDK-3861-Segment_Swift_Migration",
+        "revision" : "c56c32cc83b6041effc7f8c891c8bd9c678656a2"
+      }
+    },
+    {
+      "identity" : "jsonsafeencoding-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/jsonsafeencoding-swift.git",
+      "state" : {
+        "revision" : "af6a8b360984085e36c6341b21ecb35c12f47ebd",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "sovran-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/sovran-swift.git",
+      "state" : {
+        "revision" : "24867f3e4ac62027db9827112135e6531b6f4051",
+        "version" : "1.1.2"
+      }
+    }
+  ],
+  "version" : 2
+}

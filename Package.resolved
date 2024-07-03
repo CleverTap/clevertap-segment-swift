@@ -11,12 +11,30 @@
         }
       },
       {
+        "package": "CleverTapSDK",
+        "repositoryURL": "https://github.com/CleverTap/clevertap-ios-sdk.git",
+        "state": {
+          "branch": null,
+          "revision": "087e53109305fb8c9ffeaea81be718317980beff",
+          "version": "5.2.2"
+        }
+      },
+      {
         "package": "JSONSafeEncoding",
         "repositoryURL": "https://github.com/segmentio/jsonsafeencoding-swift.git",
         "state": {
           "branch": null,
           "revision": "af6a8b360984085e36c6341b21ecb35c12f47ebd",
           "version": "2.0.0"
+        }
+      },
+      {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "state": {
+          "branch": null,
+          "revision": "be0bcd7823ce56629948491f2eaeaa19979514f7",
+          "version": "5.19.4"
         }
       },
       {

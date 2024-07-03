@@ -23,6 +23,11 @@ let package = Package(
             name: "Segment",
             url: "https://github.com/segmentio/analytics-swift.git",
             from: "1.4.0"
+        ),
+        .package(
+            name: "CleverTapSDK",
+            url: "https://github.com/CleverTap/clevertap-ios-sdk.git",
+            from: "5.0.1"
         )
     ],
     targets: [
@@ -30,7 +35,8 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "SegmentCleverTap",
-            dependencies: ["Segment"]),
+            dependencies: [.product(name: "Segment", package: "Segment"),
+                           .product(name: "CleverTapSDK", package: "CleverTapSDK")])
         
         // TESTS ARE HANDLED VIA THE EXAMPLE APP.
     ]
