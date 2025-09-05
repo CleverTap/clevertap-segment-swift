@@ -1,63 +1,22 @@
 //
-//  ExampleDestination.swift
-//  ExampleDestination
+//  CleverTapDestination.swift
+//  SegmentCleverTap
 //
-//  Created by Cody Garvin on 9/13/21.
+//  Created by Nishant Kumar on 04/09/25.
 //
-
-// NOTE: You can see this plugin in use in the DestinationsExample application.
-//
-// This plugin is NOT SUPPORTED by Segment.  It is here merely as an example,
-// and for your convenience should you find it useful.
-//
-
-// MIT License
-//
-// Copyright (c) 2021 Segment
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
 
 import Foundation
 import Segment
-import CleverTap
-//import ExampleModule // TODO: Import partner SDK module here
+import CleverTapSDK
 
-/**
- An implementation of the Example Analytics device mode destination as a plugin.
- */
- 
-@objc(SEGExampleDestination)
-public class ObjCSegmentMixpanel: NSObject, ObjCDestination, ObjCDestinationShim {
-    public func instance() -> DestinationPlugin { return ExampleDestination() }
-}
-
-public class CleverTapDestination: DestinationPlugin {
-    let libVersion = 10206
+public class CleverTapDestination: DestinationPlugin, RemoteNotifications {
+    let libVersion: Int32 = 10000
     let libName = "Segment-Swift"
     
     public let timeline = Timeline()
     public let type = PluginType.destination
-    // TODO: Fill this out with your settings key that matches your destination in the Segment App
     public let key = "CleverTap"
     public var analytics: Analytics? = nil
-    
-    private var clevertapSettings: CleverTapSettings?
         
     public init() { }
 
@@ -67,19 +26,20 @@ public class CleverTapDestination: DestinationPlugin {
         
         // Grab the settings and assign them for potential later usage.
         // Note: Since integrationSettings is generic, strongly type the variable.
-        guard let tempSettings: CleverTapSettings = settings.integrationSettings(forPlugin: self) else { return }
-        clevertapSettings = tempSettings
+        guard let clevertapSettings: CleverTapSettings = settings.integrationSettings(forPlugin: self) else {
+            log("CleverTapSettings not available. Not loading CleverTap Destination.")
+            return
+        }
         
-        // TODO: initialize partner SDK here
-        
-        guard let accountID = clevertapSettings["clevertap_account_id"] as? String,
+        guard let accountID = clevertapSettings.clevertap_account_id as? String,
               !accountID.isEmpty,
-              let accountToken = clevertapSettings["clevertap_account_token"] as? String,
+              let accountToken = clevertapSettings.clevertap_account_token as? String,
               !accountToken.isEmpty else {
+            log("CleverTap+Segment integration attempted initialization without account ID or account token.")
             return
         }
 
-        var region = settings["region"] as? String ?? ""
+        var region = clevertapSettings.region as? String ?? ""
         region = region.replacingOccurrences(of: ".", with: "")
 
         if Thread.isMainThread {
@@ -89,25 +49,23 @@ public class CleverTapDestination: DestinationPlugin {
                 self.launchWithAccountId(accountID, token: accountToken, region: region)
             }
         }
-        
+        log("Configured CleverTap+Segment integration and initialized CleverTap.")
     }
     
     public func identify(event: IdentifyEvent) -> IdentifyEvent? {
-        
-        guard let traits = event.traits?.dictionaryValue else{
-            // TODO: Do something with traits if they exist
-            return
+        guard let traits = event.traits?.dictionaryValue else {
+            log("Identify: Traits is nil.")
+            return nil
         }
         
-        // TODO: Do something with userId & traits in partner SDK
-        
        if traits.count <= 0 {
-           return
+           log("Identify: Traits doesn't have values.")
+           return nil
        }
        
        var profile = traits
        
-       if let userId = traits.userId, !userId.isEmpty {
+       if let userId = event.userId, !userId.isEmpty {
            profile["Identity"] = userId
        }
        
@@ -153,65 +111,35 @@ public class CleverTapDestination: DestinationPlugin {
        }
        
        self.onUserLogin(profile)
-        
        return event
     }
     
     public func track(event: TrackEvent) -> TrackEvent? {
-        
-//        var returnEvent = event
-//        
-//        // !!!: Sample of how to convert property keys
-//        if let mappedProperties = try? event.properties?.mapTransform(ExampleDestination.eventNameMap,
-//                                                                      valueTransform: ExampleDestination.eventValueConversion) {
-//            returnEvent.properties = mappedProperties
-//        }
-                
-        // TODO: Do something with event & properties in partner SDK from returnEvent
-        
         if event.event == "Order Completed"{
-            return self.handleOrderCompleted(event)
+            self.handleOrderCompleted(event)
+        } else {
+            self.recordEvent(event.event, withProps: event.properties?.dictionaryValue ?? [:])
         }
-        
-        self.recordEvent(event.event, withProps: event.properties)
-        
         return event
     }
     
     public func screen(event: ScreenEvent) -> ScreenEvent? {
-        
-        guard let screenName = event.name else{
-            // TODO: Do something with properties if they exist
-            return
+        guard let screenName = event.name else {
+            log("Screen: Event name is empty.")
+            return nil
         }
-                    
-        // TODO: Do something with name, category & properties in partner SDK
         
         CleverTap.sharedInstance()?.recordScreenView(screenName)
-        
         return event
     }
     
-//    public func group(event: GroupEvent) -> GroupEvent? {
-//        
-//        if let _ = event.traits?.dictionaryValue {
-//            // TODO: Do something with traits if they exist
-//        }
-//        
-//        // TODO: Do something with groupId & traits in partner SDK
-//        
-//        return event
-//    }
-    
     public func alias(event: AliasEvent) -> AliasEvent? {
-        
-        // TODO: Do something with previousId & userId in partner SDK
-        if (!event.userId || event.userId.length <= 0){
-            return
+        guard let userId = event.userId, !userId.isEmpty else {
+            log("Alias: UserId is nil or empty.")
+            return nil
         }
         
         self.profilePush(["Identity" : event.userId])
-        
         return event
     }
     
@@ -219,17 +147,28 @@ public class CleverTapDestination: DestinationPlugin {
         // TODO: Do something with resetting partner SDK
     }
     
+    public func registeredForRemoteNotifications(deviceToken: Data) {
+        CleverTap.sharedInstance()?.setPushToken(deviceToken)
+    }
     
-    //Local methods
-    func onUserLogin(_ profile: [String: Any]) {
+    public func receivedRemoteNotification(userInfo: [AnyHashable: Any]) {
+        CleverTap.sharedInstance()?.handleNotification(withData: userInfo)
+    }
+    
+    public func handleAction(identifier: String, userInfo: [String: Any]) {
+        CleverTap.sharedInstance()?.handleNotification(withData: userInfo)
+    }
+    
+    private func onUserLogin(_ profile: [String: Any]) {
         do {
             try CleverTap.sharedInstance()?.onUserLogin(profile)
         } catch let error as NSError {
+            log("Identify: Error pushing profile \(error.localizedDescription).")
             CleverTap.sharedInstance()?.recordError(withMessage: error.localizedDescription, andErrorCode: 512)
         }
     }
     
-    func handleOrderCompleted(_ event: TrackEvent) {
+    private func handleOrderCompleted(_ event: TrackEvent) {
         guard event.event == "Order Completed" else {
             return
         }
@@ -237,28 +176,28 @@ public class CleverTapDestination: DestinationPlugin {
         var details = [String: Any]()
         var items = [Any]()
         
-        let segmentProps = event.properties
-        
-        for (key, value) in segmentProps {
-            if key == "products", let value = value as? [Any], !value.isEmpty {
-                items = value
-            } else if value is [String: Any] || value is [Any] {
-                continue
-            } else if key == "order_id" {
-                details["Charged ID"] = value
-                details[key] = value
-            } else if key == "total" {
-                details["Amount"] = value
-                details[key] = value
-            } else {
-                details[key] = value
+        if let segmentProps = event.properties?.dictionaryValue {
+            for (key, value) in segmentProps {
+                if key == "products", let value = value as? [Any], !value.isEmpty {
+                    items = value
+                } else if value is [String: Any] || value is [Any] {
+                    continue
+                } else if key == "order_id" {
+                    details["Charged ID"] = value
+                    details[key] = value
+                } else if key == "total" {
+                    details["Amount"] = value
+                    details[key] = value
+                } else {
+                    details[key] = value
+                }
             }
         }
         
         CleverTap.sharedInstance()?.recordChargedEvent(withDetails: details, andItems: items)
     }
     
-    func recordEvent(_ event: String, withProps props: [String: Any]) {
+    private func recordEvent(_ event: String, withProps props: [String: Any]) {
         do {
             CleverTap.sharedInstance()?.recordEvent(event, withProps: props)
         } catch {
@@ -266,53 +205,37 @@ public class CleverTapDestination: DestinationPlugin {
         }
     }
     
-    func profilePush(_ profile: [String: Any]) {
+    private func profilePush(_ profile: [String: Any]) {
         do {
             CleverTap.sharedInstance()?.profilePush(profile)
         } catch {
             if let exception = error as? NSException {
+                log("Alias: Error pushing profile \(error.localizedDescription).")
                 CleverTap.sharedInstance()?.recordError(withMessage: exception.description, andErrorCode: 512)
             }
         }
     }
     
-    func launchWithAccountId(_ accountID: String, token accountToken: String, region: String) {
+    private func launchWithAccountId(_ accountID: String, token accountToken: String, region: String) {
         CleverTap.setCredentialsWithAccountID(accountID, token: accountToken, region: region)
         CleverTap.sharedInstance()?.setLibrary(libName)
         CleverTap.sharedInstance()?.setCustomSdkVersion(libName, version: libVersion)
-        CleverTap.sharedInstance()?.notifyApplicationLaunched(options: nil)
+        CleverTap.sharedInstance()?.notifyApplicationLaunched(withOptions: nil)
     }
-    
+
+    private func log(_ message: String) {
+        analytics?.log(message: "[CleverTapSegmentSwift]: \(message)")
+    }
 }
 
-// Example of versioning for your plugin
 extension CleverTapDestination: VersionedPlugin {
     public static func version() -> String {
         return __destination_version
     }
 }
 
-// Example of what settings may look like.
 private struct CleverTapSettings: Codable {
-    let clevertap_account_id: String
+    let clevertap_account_id: String?
     let clevertap_account_token: String?
     let region: String?
 }
-
-// Rules for converting keys and values to the proper formats that bridge
-// from Segment to the Partner SDK. These are only examples.
-//private extension ExampleDestination {
-//    
-//    static var eventNameMap = ["ADD_TO_CART": "Product Added",
-//                               "PRODUCT_TAPPED": "Product Tapped"]
-//    
-//    static var eventValueConversion: ((_ key: String, _ value: Any) -> Any) = { (key, value) in
-//        if let valueString = value as? String {
-//            return valueString
-//                .replacingOccurrences(of: "-", with: "_")
-//                .replacingOccurrences(of: " ", with: "_")
-//        } else {
-//            return value
-//        }
-//    }
-//}

@@ -1,21 +1,22 @@
 {
+  "originHash" : "0059cb58c6fd0a565971b2ffc4368e378121e1179f1cec83e00edbfab5f72f8b",
   "pins" : [
     {
       "identity" : "analytics-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/segmentio/analytics-swift.git",
       "state" : {
-        "revision" : "f6f3a7fafcace7bcdbda329f9b309f31bf9a42a1",
-        "version" : "1.5.11"
+        "revision" : "5d3a762da5412d324205a58358b95e1da334c21e",
+        "version" : "1.8.0"
       }
     },
     {
-      "identity" : "clevertap-segment-swift",
+      "identity" : "clevertap-ios-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CleverTap/clevertap-segment-swift.git",
+      "location" : "https://github.com/CleverTap/clevertap-ios-sdk.git",
       "state" : {
-        "branch" : "SDK-3861-Segment_Swift_Migration",
-        "revision" : "c56c32cc83b6041effc7f8c891c8bd9c678656a2"
+        "revision" : "087e53109305fb8c9ffeaea81be718317980beff",
+        "version" : "5.2.2"
       }
     },
     {
@@ -28,6 +29,15 @@
       }
     },
     {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "b62cb63bf4ed1f04c961a56c9c6c9d5ab8524ec6",
+        "version" : "5.21.1"
+      }
+    },
+    {
       "identity" : "sovran-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/segmentio/sovran-swift.git",
@@ -37,5 +47,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

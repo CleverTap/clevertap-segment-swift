@@ -6,16 +6,31 @@
 //
 
 import UIKit
+import UserNotifications
 import Segment
 import SegmentCleverTap
+import CleverTapSDK
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Analytics.debugLogsEnabled = true
+        Analytics.main.add(plugin: CleverTapDestination())
+        CleverTap.setDebugLevel(3)
+        
+        // push notifications
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) {
+            (granted, error) in
+            if (granted) {
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
         return true
     }
 
@@ -32,7 +47,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Analytics.main.registeredForRemoteNotifications(deviceToken: deviceToken)
+    }
+}
 
-
+extension Analytics {
+    static var main: Analytics = {
+        let analytics = Analytics(
+            configuration: Configuration(writeKey: "cuSIiei29JvXHD24aM8IsDP0ACnjyC9s")
+                .flushAt(3)
+                .flushInterval(10)
+                .setTrackedApplicationLifecycleEvents([
+                    .applicationOpened,
+                    .applicationInstalled
+                ])
+        )
+        return analytics
+    }()
 }
 
