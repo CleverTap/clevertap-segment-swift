@@ -1,5 +1,5 @@
 {
-  "originHash" : "0059cb58c6fd0a565971b2ffc4368e378121e1179f1cec83e00edbfab5f72f8b",
+  "originHash" : "e6ee60d16022705497b5b18be038e3e86cd87b4e4ed615535c41c4b169b9b19d",
   "pins" : [
     {
       "identity" : "analytics-swift",
@@ -20,6 +20,15 @@
       }
     },
     {
+      "identity" : "clevertap-segment-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CleverTap/clevertap-segment-swift.git",
+      "state" : {
+        "branch" : "SDK-3861-Segment_Swift_Migration",
+        "revision" : "6337174e15a58430bc150157bb5faad578127c87"
+      }
+    },
+    {
       "identity" : "jsonsafeencoding-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/segmentio/jsonsafeencoding-swift.git",
@@ -33,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "b62cb63bf4ed1f04c961a56c9c6c9d5ab8524ec6",
-        "version" : "5.21.1"
+        "revision" : "34cf2423a2c4088d06a3b08655603b5bc3eeeb3a",
+        "version" : "5.21.2"
       }
     },
     {
