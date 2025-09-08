@@ -1,25 +1,112 @@
-# Swift Destination Plugin Template
-This template is resolved around `ExampleDestination` (to be replaced by you). 
+<p align="center">
+  <img src="https://github.com/CleverTap/clevertap-ios-sdk/blob/master/docs/images/clevertap-logo.png" width = "50%"/>
+</p>
 
-## What does the template provide
-### Data class for holding settings
-To standardize fetching and using settings in your destination, we recommend using a Coable class to store your destination settings. If marked `Codable`, it will enable you to retrieve your destination settings in a strongly typed construct.
+# CleverTap Segment Swift SDK
+CleverTap destination plugin for Segment Swift Analytics.
 
-### Settings-related functions
-We provide APIs to update your destination settings in `update(settings:type:)`.
-`UpdateType.initial` lets you know if this is the intial or subsequent fetch.
+## Installation
+- In Xcode, navigate to **File -> Swift Package Manager -> Add Package Dependency.**
+- Enter **https://github.com/CleverTap/clevertap-segment-swift.git** when choosing package repo and Click **Next.**
+- On the next screen, Select an SDK version (by default, Xcode selects the latest stable version). Click **Next.**
+- Click **Finish** and ensure that the `SegmentCleverTap` has been added to the appropriate target.
 
-`Settings.isDestinationEnabled(key: String)`
-- check if your destination is enabled
+## Quick Start
+```swift
+import Segment
+import SegmentCleverTap
 
-`Settings.integrationSettings(forKey: String)`
-- retrieve a typed destination object
+let analytics = Analytics(configuration: Configuration(writeKey: "YOUR_WRITE_KEY_HERE"))
+analytics.add(plugin: CleverTapDestination())
+```
+Refer [Sample App](ExampleSPM) for more details.
 
-### Sample implementation for common destination functions
-We have templated common destinations functions like `track`, `identify`, `screen`, `group`, `alias` that you should modify to fit your vendor SDK implementation. Although these functions do not need to return the ending payload, its good practice to do so (for unit testing purposes).
+## Usage
+### 1. Record User Information
+Segment's `identify` API is mapped to CleverTap's `onUserLogin`.
+```swift
+let floatAttribute = 12.3
+let integerAttribute: Int = 18
+let shortAttribute: Int16 = 2
+let birthdate: Date = Date(timeIntervalSince1970: 946684800) // 1 Jan 2000
+let traits: [String: Any] = [
+    "email": "support@clevertap.com",
+    "bool": true,
+    "double": 3.14159,
+    "stringInt": "1",
+    "integerAttribute": integerAttribute,
+    "floatAttribute": floatAttribute,
+    "shortAttribute": shortAttribute,
+    "gender": "female",
+    "name": "Segment CleverTap",
+    "phone": "+15555555556",
+    "birthday": birthdate,
+    "testArr": ["1", "2", "3"],
+    "address": [
+        "city": "New York",
+        "country": "US"
+    ]
+]
+analytics.identify(userId: "cleverTapSegmentSwiftUseriOS", traits: traits)
+```
+You can also use the Segment's `alias` method for user identification:
 
-### Transforming events
-Often times, destinations need to transform events (eg: change names, modify properties/traits etc.). We have templated an example of transformation in the `track(event:)` example. we recommend you use this approach to perform any such transformations. This will make your code more legible plus improve code quality.
+```swift
+analytics.alias(newId: "new_id")
+```
 
-### Testing functions for primary functions (to be expanded)
-We have provided a very bare minimum template for testing the primary destination APIs. We recommend to use this as a starter and build upon it to get test coverage of most scenarios.
+### 2. Record an Event
+Segment's `track` API is mapped to CleverTap's `recordEvent`.
+
+```swift
+let properties: [String: Any] = [
+    "eventproperty": "eventPropertyValue",
+    "testPlan": "Pro",
+    "testEvArr": [1, 2, 3]
+]
+analytics.track(name: "testEvent", properties: properties)
+```
+
+### 3. Record a Charged Event
+Events tracked using the name `Order Completed` is mapped to CleverTap’s `Charged` event.
+```swift
+let orderProperties: [String: Any] = [
+    "checkout_id": "fksdjfsdjfisjf9sdfjsd9f",
+    "order_id": "50314b8e9bcf000000000000",
+    "affiliation": "Google Store",
+    "total": 30,
+    "revenue": 25,
+    "currency": "USD",
+    "products": [
+        [
+            "product_id": "507f1f77bcf86cd799439011",
+            "sku": "45790-32",
+            "name": "Monopoly: 3rd Edition",
+            "price": 19,
+            "quantity": 1,
+            "category": "Games"
+        ],
+        [
+            "product_id": "505bd76785ebb509fc183733",
+            "sku": "46493-32",
+            "name": "Uno Card Game",
+            "price": 3,
+            "quantity": 2,
+            "category": "Games"
+        ]
+    ]
+]
+analytics.track(name: "Order Completed", properties: orderProperties)
+```
+
+### 4. Record Screen
+Segment's `screen` API is mapped to CleverTap's `recordScreenView`.
+
+```swift
+analytics.screen(title: "Test Screen")
+```
+
+### 5. CleverTap Specific Features
+Access CleverTap-specific features through the CleverTap instance
+
+Refer to the CleverTap SDK [documentation](https://developer.clevertap.com/docs/ios) for more details.
