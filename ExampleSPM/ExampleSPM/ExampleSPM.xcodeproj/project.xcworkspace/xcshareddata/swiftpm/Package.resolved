@@ -25,7 +25,7 @@
       "location" : "https://github.com/CleverTap/clevertap-segment-swift.git",
       "state" : {
         "branch" : "SDK-3861-Segment_Swift_Migration",
-        "revision" : "d1b1445c03da7713b0973470c428211bdc2362d3"
+        "revision" : "50b0a7d6bb84877632ec6a43552131efaee0218d"
       }
     },
     {

@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "SegmentCleverTap",
+    name: "CleverTap-Segment-Swift",
     platforms: [
         .iOS("13.0"),
         .tvOS("11.0"),
