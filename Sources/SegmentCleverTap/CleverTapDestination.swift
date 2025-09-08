@@ -103,12 +103,9 @@ public class CleverTapDestination: DestinationPlugin, RemoteNotifications {
        } else if let birthdayDate = traits["birthday"] as? Date {
            profile["DOB"] = birthdayDate
        }
-       
-       for key in profile.keys {
-           if profile[key] is [String: Any] {
-               profile.removeValue(forKey: key)
-           }
-       }
+        
+       let nestedKeys = profile.keys.filter { profile[$0] is [String: Any] }
+       nestedKeys.forEach { profile.removeValue(forKey: $0) }
        
        self.onUserLogin(profile)
        return event
@@ -139,7 +136,7 @@ public class CleverTapDestination: DestinationPlugin, RemoteNotifications {
             return nil
         }
         
-        self.profilePush(["Identity" : event.userId])
+        self.profilePush(["Identity" : userId])
         return event
     }
     

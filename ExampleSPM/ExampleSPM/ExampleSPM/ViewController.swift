@@ -40,7 +40,7 @@ class ViewController: UIViewController, CleverTapInboxViewControllerDelegate {
             ]
         ]
         
-        Analytics.main.identify(userId: "cleverTapSegementSwiftUseriOS", traits: traits)
+        Analytics.main.identify(userId: "cleverTapSegmentSwiftUseriOS", traits: traits)
     }
     
     @IBAction func trackButton(_ sender: Any) {

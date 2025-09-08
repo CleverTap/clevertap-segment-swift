@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CleverTap/clevertap-ios-sdk.git",
       "state" : {
-        "revision" : "087e53109305fb8c9ffeaea81be718317980beff",
-        "version" : "5.2.2"
+        "revision" : "248a058c3c7e8a439b7adcd662bc14c9d4d5ff18",
+        "version" : "7.3.2"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/CleverTap/clevertap-segment-swift.git",
       "state" : {
         "branch" : "SDK-3861-Segment_Swift_Migration",
-        "revision" : "6337174e15a58430bc150157bb5faad578127c87"
+        "revision" : "d1b1445c03da7713b0973470c428211bdc2362d3"
       }
     },
     {
@@ -35,15 +35,6 @@
       "state" : {
         "revision" : "af6a8b360984085e36c6341b21ecb35c12f47ebd",
         "version" : "2.0.0"
-      }
-    },
-    {
-      "identity" : "sdwebimage",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage.git",
-      "state" : {
-        "revision" : "34cf2423a2c4088d06a3b08655603b5bc3eeeb3a",
-        "version" : "5.21.2"
       }
     },
     {
