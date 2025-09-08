@@ -11,21 +11,12 @@
       }
     },
     {
-      "identity" : "clevertap-ios-sdk",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CleverTap/clevertap-ios-sdk.git",
-      "state" : {
-        "revision" : "248a058c3c7e8a439b7adcd662bc14c9d4d5ff18",
-        "version" : "7.3.2"
-      }
-    },
-    {
       "identity" : "clevertap-segment-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CleverTap/clevertap-segment-swift.git",
       "state" : {
-        "branch" : "SDK-3861-Segment_Swift_Migration",
-        "revision" : "ae7ab396eef5ec082c190ea02a0928318547ca04"
+        "branch" : "main",
+        "revision" : "32dca33aac0b1c44c95d94528778269aa819a480"
       }
     },
     {
