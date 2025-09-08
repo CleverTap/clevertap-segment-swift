@@ -1,5 +1,5 @@
 {
-  "originHash" : "e6ee60d16022705497b5b18be038e3e86cd87b4e4ed615535c41c4b169b9b19d",
+  "originHash" : "0059cb58c6fd0a565971b2ffc4368e378121e1179f1cec83e00edbfab5f72f8b",
   "pins" : [
     {
       "identity" : "analytics-swift",
@@ -17,15 +17,6 @@
       "state" : {
         "revision" : "248a058c3c7e8a439b7adcd662bc14c9d4d5ff18",
         "version" : "7.3.2"
-      }
-    },
-    {
-      "identity" : "clevertap-segment-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CleverTap/clevertap-segment-swift.git",
-      "state" : {
-        "branch" : "SDK-3861-Segment_Swift_Migration",
-        "revision" : "50b0a7d6bb84877632ec6a43552131efaee0218d"
       }
     },
     {

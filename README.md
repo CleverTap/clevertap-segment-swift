@@ -9,7 +9,7 @@ CleverTap destination plugin for Segment Swift Analytics.
 - In Xcode, navigate to **File -> Swift Package Manager -> Add Package Dependency.**
 - Enter **https://github.com/CleverTap/clevertap-segment-swift.git** when choosing package repo and Click **Next.**
 - On the next screen, Select an SDK version (by default, Xcode selects the latest stable version). Click **Next.**
-- Click **Finish** and ensure that the `CleverTap-Segment-Swift` has been added to the appropriate target.
+- Click **Finish** and ensure that the `SegmentCleverTap` has been added to the appropriate target.
 
 ## Quick Start
 ```swift
@@ -28,6 +28,7 @@ Segment's `identify` API is mapped to CleverTap's `onUserLogin`.
 let floatAttribute = 12.3
 let integerAttribute: Int = 18
 let shortAttribute: Int16 = 2
+let birthdate: Date = Date(timeIntervalSince1970: 946684800) // 1 Jan 2000
 let traits: [String: Any] = [
     "email": "support@clevertap.com",
     "bool": true,
@@ -39,6 +40,7 @@ let traits: [String: Any] = [
     "gender": "female",
     "name": "Segment CleverTap",
     "phone": "+15555555556",
+    "birthday": birthdate,
     "testArr": ["1", "2", "3"],
     "address": [
         "city": "New York",

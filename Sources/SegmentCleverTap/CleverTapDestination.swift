@@ -91,17 +91,17 @@ public class CleverTapDestination: DestinationPlugin, RemoteNotifications {
                profile["Gender"] = "F"
            }
        }
-       
-       if let birthdayString = traits["birthday"] as? String {
-           let dateFormatter = DateFormatter()
-           let enUSPOSIXLocale = Locale(identifier: "en_US_POSIX")
-           dateFormatter.locale = enUSPOSIXLocale
-           dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-           if let date = dateFormatter.date(from: birthdayString) {
+
+        if let birthdayString = traits["birthday"] as? String {
+           let isoFormatter = ISO8601DateFormatter()
+           isoFormatter.formatOptions = [
+               .withInternetDateTime,
+               .withFractionalSeconds
+           ]
+
+           if let date = isoFormatter.date(from: birthdayString) {
                profile["DOB"] = date
            }
-       } else if let birthdayDate = traits["birthday"] as? Date {
-           profile["DOB"] = birthdayDate
        }
         
        let nestedKeys = profile.keys.filter { profile[$0] is [String: Any] }

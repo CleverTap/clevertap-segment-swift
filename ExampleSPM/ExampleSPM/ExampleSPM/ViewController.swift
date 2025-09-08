@@ -22,6 +22,7 @@ class ViewController: UIViewController, CleverTapInboxViewControllerDelegate {
         let floatAttribute = 12.3
         let integerAttribute: Int = 18
         let shortAttribute: Int16 = 2
+        let birthdate: Date = Date(timeIntervalSince1970: 946684800) // 1 Jan 2000
         let traits: [String: Any] = [
             "email": "support@clevertap.com",
             "bool": true,
@@ -33,6 +34,7 @@ class ViewController: UIViewController, CleverTapInboxViewControllerDelegate {
             "gender": "female",
             "name": "Segment CleverTap",
             "phone": "+15555555556",
+            "birthday": birthdate,
             "testArr": ["1", "2", "3"],
             "address": [
                 "city": "New York",
