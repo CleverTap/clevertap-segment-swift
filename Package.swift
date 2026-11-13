@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,9 +6,8 @@ import PackageDescription
 let package = Package(
     name: "CleverTap-Segment-Swift",
     platforms: [
-        .iOS("13.0"),
-        .tvOS("11.0"),
-        .watchOS("7.1")
+        .iOS(.v15),
+        .tvOS(.v15)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -20,14 +19,12 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(
-            name: "Segment",
             url: "https://github.com/segmentio/analytics-swift.git",
             from: "1.4.0"
         ),
         .package(
-            name: "CleverTapSDK",
             url: "https://github.com/CleverTap/clevertap-ios-sdk.git",
-            from: "7.0.1"
+            from: "7.9.1"
         )
     ],
     targets: [
@@ -35,8 +32,8 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "SegmentCleverTap",
-            dependencies: [.product(name: "Segment", package: "Segment"),
-                           .product(name: "CleverTapSDK", package: "CleverTapSDK")])
+            dependencies: [.product(name: "Segment", package: "analytics-swift"),
+                           .product(name: "CleverTapSDK", package: "clevertap-ios-sdk")])
         
         // TESTS ARE HANDLED VIA THE EXAMPLE APP.
     ]
