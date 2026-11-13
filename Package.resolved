@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/segmentio/analytics-swift.git",
         "state": {
           "branch": null,
-          "revision": "f6f3a7fafcace7bcdbda329f9b309f31bf9a42a1",
-          "version": "1.5.11"
+          "revision": "8a56244d3a0c7b8880cdc0046ebf99f830f4a554",
+          "version": "1.10.4"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/CleverTap/clevertap-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "248a058c3c7e8a439b7adcd662bc14c9d4d5ff18",
-          "version": "7.3.2"
+          "revision": "da5ca8205ef54c825e612281770580b026453e4f",
+          "version": "7.9.1"
         }
       },
       {

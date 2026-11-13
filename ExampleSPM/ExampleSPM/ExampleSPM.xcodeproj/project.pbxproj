@@ -14,8 +14,6 @@
 		32A595A72C354F0E00A365CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32A595A62C354F0E00A365CE /* Assets.xcassets */; };
 		32A595AA2C354F0E00A365CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A595A82C354F0E00A365CE /* LaunchScreen.storyboard */; };
 		487D48752E6EEF9100D85D74 /* SegmentCleverTap in Frameworks */ = {isa = PBXBuildFile; productRef = 487D48742E6EEF9100D85D74 /* SegmentCleverTap */; };
-		487D487E2E6F142700D85D74 /* SegmentDestination in Frameworks */ = {isa = PBXBuildFile; productRef = 487D487D2E6F142700D85D74 /* SegmentDestination */; };
-		48ADC5502E548EE900BD922F /* SegmentCleverTap in Frameworks */ = {isa = PBXBuildFile; productRef = 48ADC54F2E548EE900BD922F /* SegmentCleverTap */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +33,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				487D487E2E6F142700D85D74 /* SegmentDestination in Frameworks */,
-				48ADC5502E548EE900BD922F /* SegmentCleverTap in Frameworks */,
 				487D48752E6EEF9100D85D74 /* SegmentCleverTap in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,9 +88,7 @@
 			);
 			name = ExampleSPM;
 			packageProductDependencies = (
-				48ADC54F2E548EE900BD922F /* SegmentCleverTap */,
 				487D48742E6EEF9100D85D74 /* SegmentCleverTap */,
-				487D487D2E6F142700D85D74 /* SegmentDestination */,
 			);
 			productName = ExampleSPM;
 			productReference = 32A5959A2C354F0B00A365CE /* ExampleSPM.app */;
@@ -107,8 +101,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					32A595992C354F0B00A365CE = {
 						CreatedOnToolsVersion = 15.0;
@@ -125,7 +119,7 @@
 			);
 			mainGroup = 32A595912C354F0B00A365CE;
 			packageReferences = (
-				487D487C2E6F142700D85D74 /* XCRemoteSwiftPackageReference "clevertap-segment-swift" */,
+				487D487C2E6F142700D85D74 /* XCLocalSwiftPackageReference "../.." */,
 			);
 			productRefGroup = 32A5959B2C354F0B00A365CE /* Products */;
 			projectDirPath = "";
@@ -234,7 +228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -291,7 +285,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -314,10 +308,9 @@
 				INFOPLIST_FILE = ExampleSPM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -344,10 +337,9 @@
 				INFOPLIST_FILE = ExampleSPM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -384,28 +376,15 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		487D487C2E6F142700D85D74 /* XCRemoteSwiftPackageReference "clevertap-segment-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CleverTap/clevertap-segment-swift.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		487D487C2E6F142700D85D74 /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		487D48742E6EEF9100D85D74 /* SegmentCleverTap */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SegmentCleverTap;
-		};
-		487D487D2E6F142700D85D74 /* SegmentDestination */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 487D487C2E6F142700D85D74 /* XCRemoteSwiftPackageReference "clevertap-segment-swift" */;
-			productName = SegmentDestination;
-		};
-		48ADC54F2E548EE900BD922F /* SegmentCleverTap */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SegmentCleverTap;
 		};

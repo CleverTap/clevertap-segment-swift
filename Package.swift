@@ -6,9 +6,9 @@ import PackageDescription
 let package = Package(
     name: "CleverTap-Segment-Swift",
     platforms: [
-        .iOS("13.0"),
-        .tvOS("11.0"),
-        .watchOS("7.1")
+        .iOS("15.0"),
+        .tvOS("15.0"),
+        .watchOS("9.0")
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -27,7 +27,7 @@ let package = Package(
         .package(
             name: "CleverTapSDK",
             url: "https://github.com/CleverTap/clevertap-ios-sdk.git",
-            from: "7.0.1"
+            from: "7.9.1"
         )
     ],
     targets: [

@@ -1,22 +1,22 @@
 {
-  "originHash" : "e6ee60d16022705497b5b18be038e3e86cd87b4e4ed615535c41c4b169b9b19d",
+  "originHash" : "7aee66807e592289e08bf1b99bf69e6e39b99f8280b868cfb9d3f4a245b9446b",
   "pins" : [
     {
       "identity" : "analytics-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/segmentio/analytics-swift.git",
       "state" : {
-        "revision" : "5d3a762da5412d324205a58358b95e1da334c21e",
-        "version" : "1.8.0"
+        "revision" : "8a56244d3a0c7b8880cdc0046ebf99f830f4a554",
+        "version" : "1.10.4"
       }
     },
     {
-      "identity" : "clevertap-segment-swift",
+      "identity" : "clevertap-ios-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CleverTap/clevertap-segment-swift.git",
+      "location" : "https://github.com/CleverTap/clevertap-ios-sdk.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "32dca33aac0b1c44c95d94528778269aa819a480"
+        "revision" : "da5ca8205ef54c825e612281770580b026453e4f",
+        "version" : "7.9.1"
       }
     },
     {
