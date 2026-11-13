@@ -119,7 +119,7 @@
 			);
 			mainGroup = 32A595912C354F0B00A365CE;
 			packageReferences = (
-				487D487C2E6F142700D85D74 /* XCLocalSwiftPackageReference "../.." */,
+				487D487C2E6F142700D85D74 /* XCRemoteSwiftPackageReference "clevertap-segment-swift" */,
 			);
 			productRefGroup = 32A5959B2C354F0B00A365CE /* Products */;
 			projectDirPath = "";
@@ -376,16 +376,21 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		487D487C2E6F142700D85D74 /* XCLocalSwiftPackageReference "../.." */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../..;
+/* Begin XCRemoteSwiftPackageReference section */
+		487D487C2E6F142700D85D74 /* XCRemoteSwiftPackageReference "clevertap-segment-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CleverTap/clevertap-segment-swift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		487D48742E6EEF9100D85D74 /* SegmentCleverTap */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 487D487C2E6F142700D85D74 /* XCRemoteSwiftPackageReference "clevertap-segment-swift" */;
 			productName = SegmentCleverTap;
 		};
 /* End XCSwiftPackageProductDependency section */

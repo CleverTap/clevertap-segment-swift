@@ -5,15 +5,16 @@
 # CleverTap Segment Swift SDK
 CleverTap destination plugin for Segment Swift Analytics.
 
+## Note
+Starting from version 2.0.0, the minimum supported deployment versions are iOS 15.0 and tvOS 15.0. This follows CleverTap iOS SDK v7.9.1, which raised its own floors so the SDK builds with Xcode 27 and runs on iOS 27 and tvOS 27.
+
+> ⚠️ **Upgrading to Xcode 27 / iOS 27?** See the CleverTap iOS SDK [Xcode 27 / iOS 27 Support guide](https://github.com/CleverTap/clevertap-ios-sdk/blob/master/docs/iOS27Support.md) for the raised minimum deployment targets and UIScene lifecycle adoption.
+
 ## Requirements
-- Xcode 27 or later
 - iOS 15.0 or later
 - tvOS 15.0 or later
-- watchOS 9.0 or later
+- Xcode 15.0 or later
 - [CleverTap iOS SDK](https://github.com/CleverTap/clevertap-ios-sdk) 7.9.1 or later
-
-## Note
-Starting from version 1.1.0, the minimum supported deployment versions are iOS 15.0, tvOS 15.0 and watchOS 9.0. This follows CleverTap iOS SDK v7.9.1, which raised its own floors so the SDK builds with Xcode 27 and runs on iOS 27 and tvOS 27. See the CleverTap iOS SDK [iOS 27 support guide](https://github.com/CleverTap/clevertap-ios-sdk/blob/master/docs/iOS27Support.md) for the full migration details, including the UIScene lifecycle that iOS 26 and later enforce.
 
 ## Installation
 - In Xcode, navigate to **File -> Swift Package Manager -> Add Package Dependency.**
