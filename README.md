@@ -14,7 +14,6 @@ Starting from version 2.0.0, the minimum supported deployment versions are iOS 1
 - iOS 15.0 or later
 - tvOS 15.0 or later
 - Xcode 15.0 or later
-- [CleverTap iOS SDK](https://github.com/CleverTap/clevertap-ios-sdk) 7.9.1 or later
 
 ## Installation
 - In Xcode, navigate to **File -> Swift Package Manager -> Add Package Dependency.**
