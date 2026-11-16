@@ -7,7 +7,8 @@ let package = Package(
     name: "CleverTap-Segment-Swift",
     platforms: [
         .iOS(.v15),
-        .tvOS(.v15)
+        .tvOS(.v15),
+        .watchOS(.v9)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
