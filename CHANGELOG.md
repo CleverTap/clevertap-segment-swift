@@ -1,6 +1,6 @@
 # CHANGE LOG
 
-Version 2.0.0 (19 November, 2026)
+Version 2.0.0 (20 November, 2026)
 ===================================
 * Adds support for iOS 27, tvOS 27 and Xcode 27.
 * Raises the minimum deployment versions to iOS 15.0 and tvOS 15.0.
