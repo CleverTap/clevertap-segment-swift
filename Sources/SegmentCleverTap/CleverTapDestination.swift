@@ -10,7 +10,7 @@ import Segment
 import CleverTapSDK
 
 public class CleverTapDestination: DestinationPlugin, RemoteNotifications {
-    let libVersion: Int32 = 10000
+    let libVersion: Int32 = 20000
     let libName = "Segment-Swift"
     
     public let timeline = Timeline()

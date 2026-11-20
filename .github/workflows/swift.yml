@@ -11,25 +11,49 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-    - uses: styfle/cancel-workflow-action@0.9.1
+    - uses: styfle/cancel-workflow-action@0.12.1
       with:
         workflow_id: ${{ github.event.workflow.id }}
-        
-  build_and_test_examples:
+
+  build_package:
     needs: cancel_previous
-    runs-on: macos-11
+    # Xcode 27 image. Swap for macos-26 (Xcode 26.x) if the preview label is unavailable.
+    runs-on: xcode-27
     steps:
+    - uses: actions/checkout@v4
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '13.2.1'
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v2
+        xcode-version: '27.1'
+    - uses: actions/cache@v4
       with:
-        path: /Users/runner/Library/Developer/Xcode/DerivedData
-        key: ${{ runner.os }}-spm-examples-${{ hashFiles('**/Package.resolved') }}
+        path: ~/Library/Developer/Xcode/DerivedData
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
         restore-keys: |
-          ${{ runner.os }}-spm-examples
-    - name: build for ios simulator
+          ${{ runner.os }}-spm
+    - name: Build for iOS simulator
       run: |
-          cd Example/BasicExample
-          xcodebuild -project "BasicExample.xcodeproj" -scheme "BasicExample" -sdk iphonesimulator
+          xcodebuild -scheme CleverTap-Segment-Swift \
+            -destination 'generic/platform=iOS Simulator' \
+            build
+    - name: Build for tvOS simulator
+      run: |
+          xcodebuild -scheme CleverTap-Segment-Swift \
+            -destination 'generic/platform=tvOS Simulator' \
+            build
+
+  build_example:
+    needs: cancel_previous
+    runs-on: xcode-27
+    steps:
+    - uses: actions/checkout@v4
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '27.1'
+    - name: Build ExampleSPM for iOS simulator
+      run: |
+          cd ExampleSPM/ExampleSPM
+          xcodebuild -project "ExampleSPM.xcodeproj" \
+            -scheme "ExampleSPM" \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
